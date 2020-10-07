@@ -13,8 +13,8 @@ export default function Header({ onSubmit, validationMessage }) {
   return (
     <HeaderWrapper>
       <Form onSubmit={onSubmit}>
-        <Input name="rowsNumber" placeholder="Enter number of rows" type="number" min="1" max="20" />
-        <Input name="columnsNumber" placeholder="Enter number of columns" type="number" min="1" max="20" />
+        <Input name="rowsNumber" placeholder="Enter number of rows" />
+        <Input name="columnsNumber" placeholder="Enter number of columns" />
         <Button type="submit">Generate!</Button>
       </Form>
       <div css="color: tomato; margin: 8px; height: 30px;">{validationMessage}</div>
@@ -59,7 +59,12 @@ const formElementStyles = css`
   }
 `;
 
-const Input = styled.input`
+const Input = styled.input.attrs({
+  type: 'number',
+  min: 1,
+  max: 20,
+  inputMode: 'numeric',
+})`
   ${formElementStyles}
 `;
 
