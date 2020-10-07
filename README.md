@@ -2,13 +2,21 @@
 
 ## Task
 
-TBD in English
+[Source](https://github.com/vv1n3k/CanvasAPI-task-dancefloor)
 
-### What I did not do:
+### Requirements
 
- - no yellow square animation (time constraints)
- - no grid usage (I am not familiar with it)
- - no form clearing
+The flow of app initialization and view rendering should be as follow: 
+- App bootstraping 
+- Async operation to fetch the state (eg. You can simulate API call to recreate canvas with config) 
+- UI and Canvas 
+ 
+### Examples addons
+
+- Change square colours on document event like mouseover or onclick
+- Prepare simple API to recreate canvas based on provided config (rows and columns quantity)
+- You can prepare transform animation
+
 
 ## Installation
 
