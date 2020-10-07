@@ -21,35 +21,20 @@ export default function Dancefloor({ rows, columns }) {
   }
 
   function getSingleRow() {
-    const elements = new Array(Number(columns));
-    elements.fill(<Tile size={getTileSize()} />);
-
-    return elements;
+    const elements = [...Array(Number(columns)).keys()];
+    return elements.map(element => <Tile size={getTileSize()} key={`column_${element}`} />);
   }
 
   function getRows() {
-    const elements = new Array(Number(rows));
-    elements.fill(<TilesRow size={getTileSize()}>{getSingleRow()}</TilesRow>);
-
-    return elements;
+    const elements = [...Array(Number(rows)).keys()];
+    return elements.map(element => (
+      <TilesRow size={getTileSize()} key={`row_${element}`}>
+        {getSingleRow()}
+      </TilesRow>
+    ));
   }
 
-  return (
-    <DancefloorWrapper ref={ref}>{getRows()}</DancefloorWrapper>
-
-    // {/* <DancefloorWrapper ref={ref}>
-    //   {arr.map(row => {
-    //     return (
-    //       <TilesRow key={row} size={getTileSize()}>
-    //         {Array(columns).map(column => {
-    //           return <Tile key={`${row}_${column}`} size={getTileSize()} />;
-    //         })}
-
-    //       </TilesRow>
-    //     );
-    //   })}
-    // </DancefloorWrapper> */}
-  );
+  return <DancefloorWrapper ref={ref}>{getRows()}</DancefloorWrapper>;
 }
 
 const DancefloorWrapper = styled.section`

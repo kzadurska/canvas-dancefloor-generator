@@ -7,12 +7,11 @@ export default function Tile(props) {
   const canvasRef = useRef(null);
   const [fillColor, setFillColor] = useState(getBaseColor());
 
-  // TODO: Rename??
-  function handleMouseOver() {
+  function handleChangeColorToActive() {
     setFillColor(getActiveColor());
   }
 
-  function handleMouseOut() {
+  function handleChangeColorToBase() {
     setFillColor(getBaseColor());
   }
 
@@ -27,10 +26,10 @@ export default function Tile(props) {
   return (
     <Canvas
       ref={canvasRef}
-      onMouseOver={handleMouseOver}
-      onMouseOut={handleMouseOut}
-      onTouchStart={handleMouseOver}
-      onTouchEnd={handleMouseOut}
+      onMouseOver={handleChangeColorToActive}
+      onMouseOut={handleChangeColorToBase}
+      onTouchStart={handleChangeColorToActive}
+      onTouchEnd={handleChangeColorToBase}
       {...props}
     />
   );
