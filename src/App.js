@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { GlobalStyles } from 'styles';
+import { getDefaultGeneratorValues } from 'api';
 
 import Dancefloor from 'components/Dancefloor';
 import Header from 'components/Header';
+import Loader from 'components/Loader';
 
 export default function App() {
-  // TODO: Get values "asynchronously"
-  const [columns, setColumns] = useState(4);
-  const [rows, setRows] = useState(3);
+  const [columns, setColumns] = useState('');
+  const [rows, setRows] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
   const [validationMessage, setValidationMessage] = useState('');
 
   function handleSubmit(event) {
@@ -25,15 +27,27 @@ export default function App() {
     }
   }
 
+  useEffect(() => {
+    getDefaultGeneratorValues().then(response => {
+      setRows(response.rows);
+      setColumns(response.columns);
+      setIsLoading(false);
+    });
+  }, []);
+
   return (
     <>
       <GlobalStyles />
 
-      <main css="display: flex; flex-direction: column; align-items:center;">
-        <Header onSubmit={handleSubmit} validationMessage={validationMessage} />
+      {isLoading && <Loader />}
 
-        <Dancefloor rows={rows} columns={columns} />
-      </main>
+      {!isLoading && (
+        <main css="display: flex; flex-direction: column; align-items:center;">
+          <Header onSubmit={handleSubmit} validationMessage={validationMessage} />
+
+          <Dancefloor rows={rows} columns={columns} />
+        </main>
+      )}
     </>
   );
 }
