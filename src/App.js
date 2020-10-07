@@ -35,7 +35,7 @@ export default function App() {
     <>
       <GlobalStyles />
 
-      <div css="display: flex; flex-direction: column; align-items:center;background: papayawhip;">
+      <div css="display: flex; flex-direction: column; align-items:center;">
         <h1>Hello</h1>
 
         <Dancefloor ref={ref}>{getRows()}</Dancefloor>

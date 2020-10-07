@@ -1,29 +1,42 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { queries } from 'styles';
+import { getBaseColor, getActiveColor } from 'utils';
 
 export default function Tile(props) {
+  let canvas = null;
   const canvasRef = useRef(null);
+  const [fillColor, setFillColor] = useState(getBaseColor());
+
+  // TODO: Rename??
+  function handleMouseOver() {
+    setFillColor(getActiveColor());
+  }
+
+  function handleMouseOut() {
+    setFillColor(getBaseColor());
+  }
 
   useEffect(() => {
-    const canvas = canvasRef.current;
+    canvas = canvasRef.current;
     const context = canvas.getContext('2d');
 
-    context.fillStyle = 'red';
+    context.fillStyle = fillColor;
     context.fillRect(0, 0, context.canvas.width, context.canvas.height);
-  }, []);
+  }, [fillColor]);
 
-  return <Canvas ref={canvasRef} {...props} />;
+  return (
+    <Canvas
+      ref={canvasRef}
+      onMouseOver={handleMouseOver}
+      onMouseOut={handleMouseOut}
+      onTouchStart={handleMouseOver}
+      onTouchEnd={handleMouseOut}
+      {...props}
+    />
+  );
 }
 
 const Canvas = styled.canvas`
-  border: 1px solid black;
-
   width: ${({ size }) => size}px;
   height: ${({ size }) => size}px;
-
-//   @media ${queries.desktop} {
-//     width: 150px;
-//     height: 150px;
-//   }
 `;
