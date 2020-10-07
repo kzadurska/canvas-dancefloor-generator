@@ -23,11 +23,12 @@ export default function Header({ onSubmit, validationMessage }) {
 }
 
 const HeaderWrapper = styled.header`
-  display: flex; 
-  flex-direction: column; 
-  align-items:center; box-shadow: 
-  rgba(0, 0, 0, 0.2) 0px 2px 13px 0px; 
-  width: 100%; margin 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 13px 0px;
+  width: 100%;
 `;
 
 const Form = styled.form`
@@ -48,14 +49,14 @@ const Form = styled.form`
 
 const formElementStyles = css`
   width: 250px;
+  height: 30px;
   margin: 8px;
   box-sizing: border-box;
-  height: 30px;
 
   @media ${queries.desktop} {
     width: 200px;
-    margin: 0;
     height: 40px;
+    margin: 0;
   }
 `;
 

@@ -38,10 +38,9 @@ export default function Dancefloor({ rows, columns }) {
 }
 
 const DancefloorWrapper = styled.section`
-  background: white;
   width: 100%;
-  margin-top: 32px;
   height: 100%;
+  margin-top: 32px;
 
   @media ${queries.mobile} {
     margin: 8px;
@@ -54,8 +53,8 @@ const DancefloorWrapper = styled.section`
 `;
 
 const TilesRow = styled.div`
-  height: ${({ size }) => size}px;
-
   display: flex;
   justify-content: center;
+
+  height: ${({ size }) => size}px;
 `;

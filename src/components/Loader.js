@@ -7,11 +7,12 @@ const rotateplane = keyframes`
 `;
 
 const Loader = styled.div`
-  margin: 160px auto;
   animation: ${rotateplane} 800ms infinite ease-in-out;
-  background: lightsteelblue;
+
   width: 40px;
   height: 40px;
+  margin: 160px auto;
+  background: lightsteelblue;
   border-radius: 4px;
 `;
 
