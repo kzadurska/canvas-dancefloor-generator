@@ -8,8 +8,8 @@ import { queries } from 'styles';
 import Tile from 'components/Tile';
 
 Dancefloor.propTypes = {
-  rows: PropTypes.number.isRequired,
-  columns: PropTypes.number.isRequired,
+  rows: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  columns: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
 };
 
 export default function Dancefloor({ rows, columns }) {
