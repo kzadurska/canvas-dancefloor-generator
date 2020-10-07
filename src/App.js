@@ -1,62 +1,39 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
-import useDimensions from 'react-use-dimensions';
 
-import { GlobalStyles, queries } from 'styles';
+import { GlobalStyles } from 'styles';
 
-import Tile from 'components/Tile';
+import Dancefloor from 'components/Dancefloor';
+import Header from 'components/Header';
 
 export default function App() {
   // TODO: Get values "asynchronously"
-  const [columns] = useState(4);
-  const [rows] = useState(3);
-  const [ref, { width }] = useDimensions();
+  const [columns, setColumns] = useState(4);
+  const [rows, setRows] = useState(3);
+  const [validationMessage, setValidationMessage] = useState('');
 
-  function getTileSize() {
-    // Subtract 2px per element to make them all fit, otherwise they wrap
-    return width ? Math.floor(width / columns) - 2 : 0;
-  }
+  function handleSubmit(event) {
+    event.preventDefault();
+    const { rowsNumber, columnsNumber } = event.target;
 
-  function getSingleRow() {
-    const elements = new Array(columns);
-    elements.fill(<Tile size={getTileSize()} />);
+    if (!rowsNumber.value || !columnsNumber.value) {
+      setValidationMessage('Inputs cannot be empty');
+    } else {
+      setValidationMessage('');
 
-    return elements;
-  }
-
-  function getRows() {
-    const elements = new Array(rows);
-    elements.fill(<TilesRow size={getTileSize()}>{getSingleRow().map(elem => elem)}</TilesRow>);
-
-    return elements;
+      setRows(rowsNumber.value);
+      setColumns(columnsNumber.value);
+    }
   }
 
   return (
     <>
       <GlobalStyles />
 
-      <div css="display: flex; flex-direction: column; align-items:center;">
-        <h1>Hello</h1>
+      <main css="display: flex; flex-direction: column; align-items:center;">
+        <Header onSubmit={handleSubmit} validationMessage={validationMessage} />
 
-        <Dancefloor ref={ref}>{getRows()}</Dancefloor>
-      </div>
+        <Dancefloor rows={rows} columns={columns} />
+      </main>
     </>
   );
 }
-
-const Dancefloor = styled.div`
-  background: white;
-  width: 100%;
-
-  @media ${queries.mobile} {
-    margin: 8px;
-  }
-
-  @media ${queries.desktop} {
-    width: 50%;
-  }
-`;
-
-const TilesRow = styled.div`
-  height: ${({ size }) => size}px;
-`;
