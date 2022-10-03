@@ -16,3 +16,7 @@ export function getBaseColor() {
 export function getActiveColor() {
   return getTileColor(ACTIVE_TILE_COLORS);
 }
+
+export function getColorByIndex(index) {
+  return ACTIVE_TILE_COLORS[index];
+}
