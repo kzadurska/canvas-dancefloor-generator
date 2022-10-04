@@ -73,3 +73,8 @@ const CircleWrapper = styled.section`
     width: 50%;
   }
 `;
+
+// shadow
+// smaller size
+// thinner/ bigger donut
+// other gradient params
